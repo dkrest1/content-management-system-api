@@ -3,7 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
 const cors = require('cors');
-const { PORT, MONGODB_URI } = require("./config/constant.config");
+const { PORT, MONGODB_URI } = require("./config/constant");
 
 const app = express();
 
