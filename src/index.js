@@ -3,22 +3,45 @@ const express = require('express');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
 const cors = require('cors');
-const { PORT, MONGODB_URI } = require("./config/constant");
+const { PORT, MONGODB_URI, NODE_ENV } = require("./config/constant");
+const HttpException = require('./middlewares/http-exception');
+const httpStatus = require('http-status');
+const { errorConverter, errorHandler } = require('./config/error-handler');
+const { successHandler, failureHandler } = require('./config/morgan');
+const logger = require('./config/logger');
+
 
 const app = express();
 
-//port
-const port = PORT || 3000;
-const server = http.createServer(app);
+//log the respoonse of the http request
+if(NODE_ENV !== 'test') {
+    app.use(successHandler);
+    app.use(failureHandler);
+}
 
 app.use(helmet());
 app.use(cors());
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 
+//passport
+
+
+//routes
+
+//listen for a 404 error
+app.use((_req, _res, next) => {
+    next(new HttpException(httpStatus.NOT_FOUND, "Not Found")); 
+});
+app.use(errorConverter)
+app.use(errorHandler)
+
+//port
+const port = PORT || 3000;
+const server = http.createServer(app);
 
 function onListening() {
-    console.log(`server live and active on port ${port}`);
+    logger.info(`Server live and active on port ${port}`);
 }
 
 function onError(error) {
@@ -27,10 +50,10 @@ function onError(error) {
 
     switch (error.code) {
         case 'EACCES':
-            console.log(bind + ' requires elevated privileges');
+            logger.error(bind + ' requires elevated privileges');
             process.exit(1);
         case 'EADDRINUSE':
-            console.log(bind + ' is already in use');
+            logger.error(bind + ' is already in use');
             process.exit(1);
         default: throw error;
     }
@@ -39,17 +62,12 @@ function onError(error) {
 server.on('error', onError);
 server.on('listening', onListening);
 
-// listen for a 404 error
-app.use((_req, _res, next) => {
-    next('Not found'); 
-});
-
 // connect to MongoDB and listen for server connection
 mongoose.connect(MONGODB_URI)
     .then(() => {
-        console.log('Connected to database successfully');
+        logger.info('Connected to database successfully');
         server.listen(port);
     })
     .catch((error) => {
-        console.error('Error connecting to database:', error);
+        logger.error('Error connecting to database:', error);
     });

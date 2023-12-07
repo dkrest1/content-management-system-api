@@ -1,5 +1,5 @@
 const winston = require("winston")
-import config from "../../../constants/variable.constant.js";
+const { NODE_ENV } =  require("./constant")
 
 const errorFormat = winston.format((info) => {
     if (info instanceof Error) {
@@ -8,10 +8,10 @@ const errorFormat = winston.format((info) => {
     return info
 })
 const logger = winston.createLogger({
-    level: config.env === 'development' ? "debug" : 'info',
+    level: NODE_ENV === 'development' ? "debug" : 'info',
     format: winston.format.combine(
         errorFormat(),
-        config.env === 'development' ? winston.format.colorize() : winston.format.uncolorize(),
+        NODE_ENV=== 'development' ? winston.format.colorize() : winston.format.uncolorize(),
         winston.format.splat(),
         winston.format.printf((info) => `${info.level} : ${info.message}`)
 
@@ -20,4 +20,4 @@ const logger = winston.createLogger({
 
 })
 
-export default logger
+module.exports = logger
