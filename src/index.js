@@ -9,6 +9,11 @@ const httpStatus = require('http-status');
 const { errorConverter, errorHandler } = require('./config/error-handler');
 const { successHandler, failureHandler } = require('./config/morgan');
 const logger = require('./config/logger');
+const sockerServer = require("./socket-server")
+const authRoutes = require("./routes/auth.route");
+const userRoutes = require("./routes/user.route");
+const postRoutes = require("./routes/post.route");
+const categoryRoutes = require("./routes/category.route");
 
 
 const app = express();
@@ -28,6 +33,10 @@ app.use(express.urlencoded({ extended: true }));
 
 
 //routes
+app.use("/api/v1/users", userRoutes);
+app.use("/api/v1/posts", postRoutes);
+app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/categories", categoryRoutes);
 
 //listen for a 404 error
 app.use((_req, _res, next) => {
@@ -64,6 +73,11 @@ server.on('listening', onListening);
 
 // connect to MongoDB and listen for server connection
 mongoose.connect(MONGODB_URI)
+    .then(() => {
+        sockerServer(server)
+        logger.info('Connected to socket server successfully')
+
+    })
     .then(() => {
         logger.info('Connected to database successfully');
         server.listen(port);

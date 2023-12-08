@@ -1,5 +1,6 @@
-import mongoose from "mongoose";
-import mongoosePaginate from 'mongoose-paginate-v2'
+const mongoose = require("mongoose");
+const mongoosePaginate = require("mongoose-paginate-v2");
+
 
 const PostSchema = new mongoose.Schema(
     {
@@ -38,4 +39,4 @@ PostSchema.set('toJSON', {
 
 const PostModel = mongoose.model("posts", PostSchema)
 
-export default PostModel
+module.exports =  PostModel
