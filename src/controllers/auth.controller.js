@@ -1,30 +1,48 @@
-const signUpUser = async (req, res, next) => {
-    try {
+const httpStatus = require("http-status")
+const HttpException = require("../middlewares/http-exception")
+const UserModel = require("../models/user.model")
+const asyncErrorHandler = require("../utils/async-error-handler.util")
 
-    }catch(err) {
-        next(err)
+const signUpUser = asyncErrorHandler(async (req, res) => {
+    const {username, email, password} = req.body
+    const existingUser = await UserModel.findOne({email})
+    const existingUsername = await UserModel.findOne({username})
+    if(existingUser) {
+        throw new HttpException(httpStatus.BAD_REQUEST, "User with email existed")
     }
-}
 
-const loginUser = async (req, res, next) => {
-    try {
-
-    }catch(err) {
-        next(err)
+    if(existingUsername) {
+        throw new HttpException(httpStatus.BAD_REQUEST, "User with username existed")
     }
-}
 
-const forgetPassword = async (req, res, next) => {
-    try {
+    const user = new UserModel({
+        username,
+        email,
+        password
+    })
 
-    }catch(err) {
-        next(err)
-    }
-}
+    return res.status(201).json({
+        status: httpStatus.CREATED,
+        message: "Created",
+        payload: user
+    })
 
-const resetPassword = async (req, res, next) => {
 
-}
+
+})
+
+const loginUser = asyncErrorHandler(async (req, res) => {
+    
+})
+
+const forgetPassword = asyncErrorHandler(async (req, res) => {
+    
+})
+
+const resetPassword = asyncErrorHandler(async (req, res) => {
+    
+})
+
 
 module.exports = {
     signUpUser,

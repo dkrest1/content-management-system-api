@@ -27,7 +27,7 @@ const errorHandler = (err, _req, res, _next) => {
 
     const response = {
         status: httpStatus[statusCode],
-        msg: message,
+        message,
         payload: null,
     };
 

@@ -1,4 +1,8 @@
 const express = require('express')
+const {
+    validateLoginDTO,
+    validateSignUpDTO
+} = require("../validators/auth.validator")
 
 const router = express.Router()
 

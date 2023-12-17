@@ -1,8 +1,8 @@
-const LocalAuth = require('passport-local')
-import bcrypt from 'bcrypt';
-import UserModel from "../models/user.model";
-import ApiError from "@/middlewares/api-error.types";
-import httpStatus from "http-status";
+const LocalAuth = require('passport-local');
+const bcrypt = require("bcrypt");
+const UserModel = require("../models/user.model")
+const HttpException = require("./http-exception");
+const httpStatus = require('http-status');
 
 const LocalStrategy = LocalAuth.Strategy;
 
@@ -14,12 +14,12 @@ module.exports =  function initialize(passport) {
     try {
       const response = await UserModel.findOne({ email });
       if (!response)  {
-        throw new ApiError(httpStatus.BAD_REQUEST, "invalid credentials")
+        throw new HttpException(httpStatus.BAD_REQUEST, "Invalid credentials")
       }
       const user = response;
       const compare = await bcrypt.compare(password, user.password);
       if (!compare) {
-        throw new ApiError(httpStatus.BAD_REQUEST, "invalid credentials")
+        throw new HttpException(httpStatus.BAD_REQUEST, "Invalid credentials")
       }
 
       return done(null, user);
@@ -28,6 +28,6 @@ module.exports =  function initialize(passport) {
     }
   });
   passport.use('users', authenticateUser);
-  passport.serializeUser((data, done) => done(null, data))
-  passport.deserializeUser((data, done) => done(null, data))
+  // passport.serializeUser((data, done) => done(null, data))
+  // passport.deserializeUser((data, done) => done(null, data))
 }

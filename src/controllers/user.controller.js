@@ -1,35 +1,20 @@
+const asyncErrorHandler = require("../utils/async-error-handler.util")
 
-const updateUser = async(req, res, next) => {
-    try{
+const updateUser = asyncErrorHandler(async (req, res) => {
+    
+})
 
-    }catch(err) {
-        next(err)
-    }
-}
+const findUser = asyncErrorHandler(async (req, res) => {
+    
+})
 
-const findUser = async(req, res, next) => {
-    try{
+const getUser = asyncErrorHandler(async (req, res) => {
+    
+})
 
-    }catch(err) {
-        next(err)
-    }
-}
-
-const getUser = async(req, res, next) => {
-    try {
-
-    }catch(err) {
-        next(err)
-    } 
-}
-
-const deleteUser = async (req, res, next) => {
-    try {
-
-    }catch(err) {
-        next(err)
-    }
-}
+const deleteUser = asyncErrorHandler(async (req, res) => {
+    
+})
 
 module.exports = {
     updateUser,

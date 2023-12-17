@@ -1,42 +1,25 @@
-const createCategory = async (req, res, next) => {
-    try {
+const UserModel = require("../models/user.model")
+const asyncErrorHandler = require("../utils/async-error-handler.util")
 
-    }catch(err) {
-        next(err)
-    }
-}
+const createCategory = asyncErrorHandler(async (req, res) => {
+    
+})
 
-const updateCategory = async(req, res, next) => {
-    try{
+const updateCategory = asyncErrorHandler(async (req, res) => {
+    
+})
 
-    }catch(err) {
-        next(err)
-    }
-}
+const findCategory = asyncErrorHandler(async (req, res) => {
+    
+})
 
-const findCategory = async(req, res, next) => {
-    try{
+const getCategory = asyncErrorHandler(async (req, res) => {
+    
+})
 
-    }catch(err) {
-        next(err)
-    }
-}
-
-const getCategory = async(req, res, next) => {
-    try {
-
-    }catch(err) {
-        next(err)
-    } 
-}
-
-const deleteCategory = async (req, res, next) => {
-    try {
-
-    }catch(err) {
-        next(err)
-    }
-}
+const deleteCategory = asyncErrorHandler(async (req, res) => {
+    
+})
 
 module.exports = {
     createCategory,

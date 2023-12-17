@@ -2,6 +2,7 @@ const http = require('http');
 const express = require('express'); 
 const mongoose = require('mongoose');
 const helmet = require('helmet');
+const passport = require("passport")
 const cors = require('cors');
 const { PORT, MONGODB_URI, NODE_ENV } = require("./config/constant");
 const HttpException = require('./middlewares/http-exception');
@@ -14,6 +15,7 @@ const authRoutes = require("./routes/auth.route");
 const userRoutes = require("./routes/user.route");
 const postRoutes = require("./routes/post.route");
 const categoryRoutes = require("./routes/category.route");
+const initialize = require("./middlewares/passport")
 
 
 const app = express();
@@ -30,7 +32,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 
 //passport
-
+initialize(passport)
 
 //routes
 app.use("/api/v1/users", userRoutes);
