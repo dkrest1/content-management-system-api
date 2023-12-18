@@ -2,14 +2,13 @@
 const httpStatus = require("http-status")
 const HttpException = require("./http-exception")
 const {
-    JWT_SECRET
+  JWT_SECRET
 } = require("../config/constant")
 const UserModel = require("../models/user.model")
 const logger = require("../config/logger")
 const { validateToken } = require("../utils/helper.util")
 
-
-const auth = asyncErrorHandler(async (req, res, next) => { 
+const auth = (...args) => (async (req, res, next) => { 
     let token
     try {
         if (
@@ -17,7 +16,7 @@ const auth = asyncErrorHandler(async (req, res, next) => {
             req.headers.authorization.startsWith('Bearer')
           ) {
             token = req.headers.authorization.split(' ')[1];
-            const payload = validateToken(
+            const payload = await validateToken(
               token,
               JWT_SECRET
             );
@@ -25,8 +24,17 @@ const auth = asyncErrorHandler(async (req, res, next) => {
             if (!user) {
               throw new HttpException(httpStatus.UNAUTHORIZED, 'Unauthorized');
             }
-            req.user = user;
-            next();
+            const role = payload.role;
+            if (args.includes(role))  {
+                req.user = user;
+                next();
+            } else {
+                return res.status(403).json({
+                    status: httpStatus.FORBIDDEN,
+                    message: "Access forbidden",
+                    payload: null
+                });
+            }
           } else {
             return res.status(401).json({
                 status: httpStatus.UNAUTHORIZED,
@@ -41,4 +49,4 @@ const auth = asyncErrorHandler(async (req, res, next) => {
     
 })
 
-export default auth
+module.exports = auth

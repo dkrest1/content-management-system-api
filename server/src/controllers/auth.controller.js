@@ -36,7 +36,7 @@ const signUpUser = asyncErrorHandler(async (req, res) => {
     return res.status(201).json({
         status: httpStatus.CREATED,
         message: "Created",
-        payload: user
+        payload: {user}
     })
 
 })
