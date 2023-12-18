@@ -69,7 +69,54 @@ const validateLoginDTO = (req, res, next) => {
     next();
 };
 
+// Login
+const forgetPasswordSchema = Joi.object({
+    email: Joi.string()
+        .email()
+        .required()
+        .messages({
+            'string.base': 'Email must be a string',
+            'string.email': 'Please enter a valid email address',
+            'any.required': 'Email is required',
+        }),
+})
+
+const validateForgetPasswordDTO = (req, res, next) => {
+    const { error } = forgetPasswordSchema.validate(req.body);
+    if (error) {
+        return res.status(400).json({
+            status: httpStatus.BAD_REQUEST,
+            message: error.details[0].message,
+            payload: null
+        });
+    }
+    next();
+};
+
+const resetPasswordSchema = Joi.object({
+    new_password: Joi.string().min(8).required().messages({
+        'string.base': 'new_password must be a string',
+        'string.min': 'new_password must be at least 8 characters long',
+        'any.required': 'new_password is required',
+      }) 
+})
+
+const validateResetPasswordDTO = (req, res, next) => {
+    const { error } = resetPasswordSchema.validate(req.body);
+    if (error) {
+        return res.status(400).json({
+            status: httpStatus.BAD_REQUEST,
+            message: error.details[0].message,
+            payload: null
+        });
+    }
+    next();
+};
+
+
 module.exports = {
     validateSignUpDTO,
-    validateLoginDTO
+    validateLoginDTO,
+    validateForgetPasswordDTO,
+    validateResetPasswordDTO
 }

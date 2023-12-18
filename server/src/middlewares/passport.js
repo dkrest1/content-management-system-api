@@ -28,6 +28,4 @@ module.exports =  function initialize(passport) {
     }
   });
   passport.use('users', authenticateUser);
-  // passport.serializeUser((data, done) => done(null, data))
-  // passport.deserializeUser((data, done) => done(null, data))
 }

@@ -1,8 +1,12 @@
 const express = require('express')
+const passport = require("passport")
 const {
     validateLoginDTO,
-    validateSignUpDTO
+    validateSignUpDTO,
+    validateForgetPasswordDTO,
+    validateResetPasswordDTO
 } = require("../validators/auth.validator")
+
 
 const router = express.Router()
 
@@ -14,8 +18,8 @@ const {
 } = require("../controllers/auth.controller")
 
 router.post("/signup", validateSignUpDTO,  signUpUser);
-router.post("/login", loginUser);
-router.post("/password/forget", forgetPassword);
-router.post("/password/reset", resetPassword);
+router.post("/login", validateLoginDTO, passport.authenticate("users", {session: false}), loginUser);
+router.post("/password/forget", validateForgetPasswordDTO, forgetPassword);
+router.post("/password/reset", validateResetPasswordDTO, resetPassword);
 
 module.exports = router
