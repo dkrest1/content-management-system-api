@@ -49,13 +49,13 @@ const updatePassword = asyncErrorHandler(async (req, res) => {
         throw new HttpException(httpStatus.BAD_REQUEST, "Incorrect password")
     }
 
-    const hashedPassword = await hashedPassword(new_password)
+    const newHashedPassword = await hashedPassword(new_password)
 
-    user.password = hashedPassword
+    user.password = newHashedPassword
     await user.save()
     return res.status(200).json({
         status: httpStatus.OK,
-        message: "Profile deleted successfully",
+        message: "Password updated successfully",
         payload: null
     })
 

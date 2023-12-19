@@ -87,3 +87,5 @@ mongoose.connect(MONGODB_URI)
     .catch((error) => {
         logger.error('Error connecting to database:', error);
     });
+
+module.exports = server

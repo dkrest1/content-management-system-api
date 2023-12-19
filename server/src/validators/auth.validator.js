@@ -28,7 +28,7 @@ const signUpSchema = Joi.object({
       }) 
 })
 
-const validateSignUpDTO= (req, res, next) => {
+const validateSignUpDTO = (req, res, next) => {
     const { error } = signUpSchema.validate(req.body);
     if (error) {
         return res.status(400).json({

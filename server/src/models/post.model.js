@@ -19,7 +19,7 @@ const PostSchema = new mongoose.Schema(
             trim: true,
             required: true
         },
-        content: {
+        body: {
             type: String,
             required: true
         },

@@ -1,4 +1,5 @@
 const Joi = require("joi");
+const httpStatus = require("http-status")
 
 // Update user
 const updateUserSchema = Joi.object({
@@ -8,7 +9,7 @@ const updateUserSchema = Joi.object({
         .message('Invalid phone number. Must be an 11-digit number without spaces.')
 })
 
-const validateUpdateUserDTO= (req, res, next) => {
+const validateUpdateUserDTO = (req, res, next) => {
     const { error } = updateUserSchema.validate(req.body);
     if (error) {
         return res.status(400).json({
