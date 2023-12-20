@@ -41,5 +41,4 @@ $ npm run dev
 
 ## API Documentation
 
-Explore the API endpoints using [Postman Documentation](https://oluwatosindev.postman.co/workspace/oluwatosin-Workspace~602c744d-ae4a-4424-8cce-ffde0d6e542c/collection/23035391-15ea8695-9479-4783-8cad-4e82c6e39c9f?action=share&creator=23035391&active-environment=23035391-d5f935fc-40ed-47a7-a46b-862673ff8d14
-)
+Explore the API endpoints using [Postman Documentation](https://oluwatosindev.postman.co/workspace/oluwatosin-Workspace~602c744d-ae4a-4424-8cce-ffde0d6e542c/collection/23035391-15ea8695-9479-4783-8cad-4e82c6e39c9f?action=share&creator=23035391&active-environment=23035391-d5f935fc-40ed-47a7-a46b-862673ff8d14)
