@@ -46,7 +46,7 @@ const validatePostId = (req, res, next) => {
 
 // Update Post
 const updatePostSchema = Joi.object({
-    category: Joi.string().trim().min(4).max(10),
+    category: Joi.string().trim().min(4).max(30),
     title: Joi.string().trim().min(5).max(100), 
     body: Joi.string().min(10).max(280), 
 })

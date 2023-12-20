@@ -19,8 +19,8 @@ const {
 
 router.post("/", validateCreateCategoryDTO, auth("admin", "user"), createCategory);
 router.patch("/:categoryId", validateCategoryId, validateUpdateCategoryDTO, auth("admin"), updateCategory);
-router.get("/", validatePagination, auth("admin", "user"), getCategory);
-router.get("/:categoryId", validateCategoryId, auth("admin", "user"), findCategory);
-router.delete("/:categoryId", validateCategoryId, auth("user"), deleteCategory)
+router.get("/", validatePagination, getCategory);
+router.get("/:categoryId", validateCategoryId, findCategory);
+router.delete("/:categoryId", validateCategoryId, auth("admin"), deleteCategory)
 
 module.exports = router

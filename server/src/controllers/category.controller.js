@@ -44,7 +44,7 @@ const updateCategory = asyncErrorHandler(async (req, res) => {
 
     return res.status(200).json({
         status: httpStatus.OK,
-        message: " Success",
+        message: "Success",
         payload: { category }
     })
 })
@@ -58,7 +58,7 @@ const findCategory = asyncErrorHandler(async (req, res) => {
 
     return res.status(200).json({
         status: httpStatus.OK,
-        message: " Success",
+        message: "Success",
         payload: { category }
     })
 
@@ -98,6 +98,8 @@ const deleteCategory = asyncErrorHandler(async (req, res) => {
         payload: null
     })
 })
+
+
 
 module.exports = {
     createCategory,

@@ -78,7 +78,7 @@ const findPost =  asyncErrorHandler(async (req, res) => {
     const postId = req.params.postId
     const post = await PostModel.findById(postId)
     if(!post) {
-        throw new HttpException(httpStatus.BAD_REQUEST, "post not found")
+        throw new HttpException(httpStatus.BAD_REQUEST, "Post not found")
     }
 
     return res.status(200).json({

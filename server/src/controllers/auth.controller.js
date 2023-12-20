@@ -53,7 +53,7 @@ const loginUser = asyncErrorHandler(async (req, res) => {
 
     return res.status(200).json({
         status: httpStatus.OK,
-        message: "Success",
+        message: "Login successful",
         payload: {
             user,
             access_token: token
@@ -65,7 +65,7 @@ const forgetPassword = asyncErrorHandler(async (req, res) => {
     const {email} = req.body
     const user = await UserModel.findOne({email})
     if(!user) {
-        throw new HttpException(httpStatus.NOT_FOUND, "user not found")
+        throw new HttpException(httpStatus.NOT_FOUND, "User not found")
     }
 
     const payload = {
