@@ -1,0 +1,39 @@
+name: Content Management API Build, Test and Deploy Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-test-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+
+      # - name: Build Frontend
+      #   run: |
+      #     cd client
+      #     npm install
+      #     npm run build
+
+      # - name: Deploy Frontend to Vercel
+      #   run: |
+      #     cd frontend  
+
+      - name: Build and Test Backend
+        run: |
+          cd server 
+          npm install
+          npm test 
+
+      # - name: Deploy Backend to AWS Lambda
+      #   run: |
+      #     cd backend  
