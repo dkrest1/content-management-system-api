@@ -1,26 +1,26 @@
-const express = require('express')
-const auth = require('../middlewares/auth')
+const express = require('express');
+const auth = require('../middlewares/auth');
 const {
-    validateCreatePostDTO,
-    validatePostId,
-    validateUpdatePostDTO,
-    validatePagination
-} = require("../validators/post.validator")
+  validateCreatePostDTO,
+  validatePostId,
+  validateUpdatePostDTO,
+  validatePagination,
+} = require('../validators/post.validator');
 
-const router = express.Router()
+const router = express.Router();
 
 const {
-    createPost,
-    updatePost,
-    deletePost,
-    findPost,
-    getPost
-} = require("../controllers/post.controller")
+  createPost,
+  updatePost,
+  deletePost,
+  findPost,
+  getPost,
+} = require('../controllers/post.controller');
 
-router.get("/", validatePagination, getPost);
-router.post("/", validateCreatePostDTO, auth("user", "admin"), createPost);
-router.get("/:postId", validatePostId, findPost);
-router.patch("/:postId", validatePostId, validateUpdatePostDTO,  auth("admin", "user"), updatePost);
-router.delete("/:postId", validatePostId, auth("user", "admin"), deletePost)
+router.get('/', validatePagination, getPost);
+router.post('/', validateCreatePostDTO, auth('user', 'admin'), createPost);
+router.get('/:postId', validatePostId, findPost);
+router.patch('/:postId', validatePostId, validateUpdatePostDTO, auth('admin', 'user'), updatePost);
+router.delete('/:postId', validatePostId, auth('user', 'admin'), deletePost);
 
-module.exports = router
+module.exports = router;

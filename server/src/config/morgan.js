@@ -1,6 +1,6 @@
-const morgan = require("morgan");
-const logger = require("./logger")
-const {NODE_ENV} =   require("./constant")
+const morgan = require('morgan');
+const logger = require('./logger');
+const { NODE_ENV } = require('./constant');
 
 morgan.token('message', (_req, res) => res.locals['errorMessage'] || '');
 
@@ -9,16 +9,16 @@ const successResponseFormat = `${getIPFormat()}:method :url :status - :response-
 const errorResponseFormat = `${getIPFormat()}:method :url :status - :response-time ms - message: :message`;
 
 const successHandler = morgan(successResponseFormat, {
-    skip: (_req, res) => res.statusCode >= 400,
-    stream: { write: (message) => logger.info(message.trim()) }
+  skip: (_req, res) => res.statusCode >= 400,
+  stream: { write: (message) => logger.info(message.trim()) },
 });
 
 const failureHandler = morgan(errorResponseFormat, {
-    skip: (_req, res) => res.statusCode < 400,
-    stream: { write: (message) => logger.error(message.trim()) }
+  skip: (_req, res) => res.statusCode < 400,
+  stream: { write: (message) => logger.error(message.trim()) },
 });
 
 module.exports = {
-    successHandler, 
-    failureHandler 
+  successHandler,
+  failureHandler,
 };
