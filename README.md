@@ -2,23 +2,25 @@
 
 ## Description
 
-A content management APIs to manage Users, Post and Categeories
+A content management Application to manage Users, Post and Categeories
 
 ## Technologies
 
 - Node 18.x
+- NextJS
 - Express
 - MongoDB
 - Mongoose ORM
+- GitHub Actions for CI
 
 
-## Getting Started
+## Getting Started for Server
 
 1. Clone the  Repo
 
 ```bash
 $ git clone repo url
-$ cd content-management-system-api
+$ cd content-management-system-api/server
 ```
 
 2. Create a .env file and copy files from .env.example to .env
@@ -28,6 +30,27 @@ $ cp .env.example .env
 ```
 
 3. install necessary packages
+
+```bash
+$ npm install
+```
+
+4. Start or Spin up the server
+
+```bash
+$ npm run dev
+```
+
+## Getting Started for Client
+
+1. Clone the  Repo
+
+```bash
+$ git clone repo url
+$ cd content-management-system-api/client
+```
+
+2. install necessary packages
 
 ```bash
 $ npm install
