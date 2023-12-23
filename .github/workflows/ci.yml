@@ -28,11 +28,14 @@ jobs:
       #   run: |
       #     cd frontend  
 
-      - name: Build and Test Backend
-        run: |
-          cd server 
-          npm install
-          npm test 
+      - name: Install Dependency
+        run: npm install
+      
+      - name: Run Tests
+        run: npm test
+        env:
+          JWT_RESET_SECRET: ${{ secrets.JWT_RESET_SECRET }}
+          JWT_RESET_SECRET_EXPIRATION: ${{ secrets.JWT_RESET_SECRET_EXPIRATION }}
 
       # - name: Deploy Backend to AWS Lambda
       #   run: |
