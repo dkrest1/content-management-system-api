@@ -29,10 +29,14 @@ jobs:
       #     cd frontend  
 
       - name: Install Dependency
-        run: npm install
+        run: |
+          cd server 
+          npm install
       
       - name: Run Tests
-        run: npm test
+        run: /
+          cd server 
+          npm test
         env:
           JWT_RESET_SECRET: ${{ secrets.JWT_RESET_SECRET }}
           JWT_RESET_SECRET_EXPIRATION: ${{ secrets.JWT_RESET_SECRET_EXPIRATION }}
