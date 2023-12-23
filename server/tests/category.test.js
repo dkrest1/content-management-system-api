@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const request = require('supertest');
 const app = require('../src/app');
 const mongoose = require('mongoose');
@@ -181,6 +182,7 @@ describe('PATCH /api/v1/categories/:categoryId', () => {
 });
 
 describe('GET /api/v1/categories', () => {
+  // eslint-disable-next-line no-unused-vars
   let token, testUser, user, testCategory1, testCategory2, category1, category2;
 
   beforeEach(async () => {
