@@ -34,7 +34,7 @@ jobs:
           npm install
       
       - name: Run Tests
-        run: /
+        run: |
           cd server 
           npm test
         env:
