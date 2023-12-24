@@ -1,4 +1,4 @@
-name: Content Management API Build, Test and Deploy Workflow
+name: Content Management API, Build, Test and Deploy Workflow
 
 on:
   push:
@@ -22,16 +22,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-
-      # - name: Build Frontend
-      #   run: |
-      #     cd client
-      #     npm install
-      #     npm run build
-
-      # - name: Deploy Frontend to Vercel
-      #   run: |
-      #     cd frontend  
 
       - name: Install Dependency
         run: |
