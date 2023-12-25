@@ -7,6 +7,7 @@ const { MongoMemoryServer } = require('mongodb-memory-server');
 const UserModel = require('../src/models/user.model');
 const { generateToken } = require('../src/utils/helper.util');
 const { JWT_RESET_SECRET, JWT_RESET_SECRET_EXPIRATION } = require('../src/config/constant');
+require('dotenv').config();
 
 let mongoServer;
 

@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const { MongoMemoryServer } = require('mongodb-memory-server');
 const CategoryModel = require('../src/models/category.model');
 const UserModel = require('../src/models/user.model');
+require('dotenv').config();
 
 let mongoServer;
 
