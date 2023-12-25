@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build-test-deploy:
+  build:
     runs-on: ubuntu-latest
 
     strategy:
@@ -16,21 +16,22 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Install Dependency and Run Test
-        run: |
-          npm install
-          npm test
+      - name: Install Dependency
+        run: npm install
+
+      - name: Install Dependency
+        run:  npm test
         env:
           JWT_RESET_SECRET: ${{ secrets.JWT_RESET_SECRET }}
           JWT_RESET_SECRET_EXPIRATION: ${{ secrets.JWT_RESET_SECRET_EXPIRATION }}
-
-      # - name: Deploy Backend to AWS Lambda
-      #   run: |
-      #     cd backend  
+  
+  deploy: 
+    runs-on: ubuntu-latest
+    needs: [build]
