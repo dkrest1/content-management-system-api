@@ -18,16 +18,16 @@ function onError(error) {
   const bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
 
   switch (error.code) {
-    case 'EACCES':
-      logger.error(bind + ' requires elevated privileges');
-      process.exitCode = 1;
-      break;
-    case 'EADDRINUSE':
-      logger.error(bind + ' is already in use');
-      process.exitCode = 1;
-      break;
-    default:
-      throw error;
+  case 'EACCES':
+    logger.error(bind + ' requires elevated privileges');
+    process.exitCode = 1;
+    break;
+  case 'EADDRINUSE':
+    logger.error(bind + ' is already in use');
+    process.exitCode = 1;
+    break;
+  default:
+    throw error;
   }
 }
 
