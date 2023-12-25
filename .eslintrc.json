@@ -4,14 +4,15 @@
     "commonjs": true,
     "es2021": true
   },
-  "extends": "eslint:recommended",
+  "extends": ["eslint:recommended", "prettier"],
+  "plugins": ["prettier"],
   "parserOptions": {
     "ecmaVersion": "latest"
   },
   "rules": {
     "semi": ["error", "always"],
     "quotes": ["error", "single"],
-    "indent": ["error", 4],
+    "indent": ["error", 2],
     "comma-spacing": ["error", { "before": false, "after": true }],
     "object-curly-spacing": ["error", "always"]
   }

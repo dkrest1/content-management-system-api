@@ -1,5 +1,5 @@
 service: content-management-api
-frameworkVersion: "3"
+frameworkVersion: '3'
 
 provider:
   name: aws

@@ -1,4 +1,4 @@
-#  Content Management System APIs
+# Content Management System APIs
 
 ## Description
 
@@ -11,10 +11,9 @@ A content management APIs to manage Users, Post and Categeories
 - MongoDB
 - Mongoose ORM
 
-
 ## Getting Started
 
-1. Clone the  Repo
+1. Clone the Repo
 
 ```bash
 $ git clone repo url
