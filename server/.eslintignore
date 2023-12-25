@@ -1,6 +1,0 @@
-/tests/**
-tests/
-**/*.test.js
-/build/**
-build/
-node_modules/

@@ -1,5 +1,5 @@
 {
-  "name": "content-management-system-api",
+  "name": "server",
   "version": "1.0.0",
   "description": "content management APIs",
   "main": "index.js",
@@ -12,8 +12,8 @@
     "test": "NODE_ENV=test jest ",
     "test:watch": "NODE_ENV=test jest --watch",
     "prepare": "cd .. && husky install server/.husky",
-    "build": "npm install", 
-    "deploy": "npm run build && npm start" 
+    "build": "npm install",
+    "deploy": "npm run build && npm start"
   },
   "keywords": [
     "nodejs",

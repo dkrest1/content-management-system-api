@@ -1,0 +1,14 @@
+service: server
+
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+
+  stage: dev
+  region: us-west-1
+
+functions:
+  hello:
+    handler: src/handler.hello
