@@ -44,17 +44,11 @@ jobs:
     needs: [build]
 
     steps:
+      - name: Install Serverless Framework
+        run: npm install -g serverless
 
-      - name: Serverless Deploy
-        uses: serverless/github-action@master
-        with:
-          args: deploy
-
-      # - name: Install Serverless Framework
-      #   run: npm install -g serverless
-
-      # - name: Deploy to AWS Lambda
-      #   run: serverless deploy
+      - name: Deploy to AWS Lambda
+        run: serverless deploy
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
