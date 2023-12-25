@@ -6,7 +6,6 @@
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "format": "prettier --write .",
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
     "test": "NODE_ENV=test jest ",
