@@ -29,8 +29,15 @@ jobs:
       - name: Run Tests
         run: npm test
         env:
+          NODE_ENV: ${{ secrets.NODE_ENV }}
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          JWT_SECRET_EXPIRATION: ${{ secrets.JWT_SECRET_EXPIRATION }}
           JWT_RESET_SECRET: ${{ secrets.JWT_RESET_SECRET }}
           JWT_RESET_SECRET_EXPIRATION: ${{ secrets.JWT_RESET_SECRET_EXPIRATION }}
+          SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          APP_URL: ${{ secrets.APP_URL }}
 
   # deploy:
   #   runs-on: ubuntu-latest
