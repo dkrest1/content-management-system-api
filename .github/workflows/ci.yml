@@ -2,9 +2,9 @@ name: Content Management API, Build, Test and Deploy Workflow
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build:
@@ -12,13 +12,13 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [ 18.x, ]
+        node-version: [18.x]
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Set up Node.js
+      - name: Set up Node
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
@@ -26,12 +26,23 @@ jobs:
       - name: Install Dependency
         run: npm install
 
-      - name: Install Dependency
-        run:  npm test
+      - name: Run Tests
+        run: npm test
         env:
           JWT_RESET_SECRET: ${{ secrets.JWT_RESET_SECRET }}
           JWT_RESET_SECRET_EXPIRATION: ${{ secrets.JWT_RESET_SECRET_EXPIRATION }}
-  
-  deploy: 
+
+  deploy:
     runs-on: ubuntu-latest
     needs: [build]
+    
+    steps:
+      - name: Install Serverless Framework
+        run: npm install -g serverless
+
+      - name: Deploy to AWS Lambda
+        run: |
+          serverless config credentials --provider aws --key ${{ secrets.AWS_ACCESS_KEY_ID }} --secret ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          serverless deploy
+     
+    
