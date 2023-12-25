@@ -1,14 +1,12 @@
-service: server
-
+service: content-management-api
 frameworkVersion: "3"
 
 provider:
   name: aws
   runtime: nodejs18.x
-
-  stage: dev
+  stage: production
   region: us-west-1
 
 functions:
-  hello:
-    handler: src/handler.hello
+  api:
+    handler: src/handler.handler
