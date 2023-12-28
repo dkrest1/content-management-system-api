@@ -1,4 +1,4 @@
-service: content-management-api
+service: content-management-api-service
 frameworkVersion: '3'
 
 provider:
