@@ -44,6 +44,9 @@ jobs:
     needs: [build]
 
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
       - name: Install AWS CLI
         run: |
           sudo apt-get install -y awscli
@@ -57,7 +60,7 @@ jobs:
 
       - name: Package Code
         run: |
-          cd content-management-system-api/src
+          cd src
           zip -r deployment-package.zip .
 
       - name: Deploy to AWS Lambda
