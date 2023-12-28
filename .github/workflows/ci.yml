@@ -49,6 +49,12 @@ jobs:
           sudo apt-get install -y awscli
           aws --version
 
+      - name: List Directory Contents
+        run: ls -R
+      
+      - name: Print Current Working Directory
+        run: pwd
+
       - name: Package Code
         run: |
           cd src
