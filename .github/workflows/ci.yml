@@ -12,14 +12,14 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x]  # Updated to Node.js 14.x, you can adjust this based on your requirements
+        node-version: [18.x] 
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
 
