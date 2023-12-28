@@ -49,15 +49,15 @@ jobs:
           sudo apt-get install -y awscli
           aws --version
 
-      - name: List Directory Contents
-        run: ls -R
-      
       - name: Print Current Working Directory
         run: pwd
 
+      - name: List All Files and Directories
+        run: ls -a
+
       - name: Package Code
         run: |
-          cd src
+          cd content-management-system-api/src
           zip -r deployment-package.zip .
 
       - name: Deploy to AWS Lambda
