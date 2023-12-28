@@ -51,7 +51,7 @@ jobs:
 
       - name: Package Code
         run: |
-          cd ../../src
+          cd src
           zip -r deployment-package.zip .
 
       - name: Deploy to AWS Lambda
