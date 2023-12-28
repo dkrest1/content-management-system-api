@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x] 
+        node-version: [18.x]
 
     steps:
       - name: Checkout Repository
@@ -23,7 +23,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Install Dependencies
+      - name: Install Dependency
         run: npm install
 
       - name: Run Tests
@@ -44,30 +44,14 @@ jobs:
     needs: [build]
 
     steps:
+
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Install AWS CLI
-        run: |
-          sudo apt-get install -y awscli
-          aws --version
-
-      - name: Print Current Working Directory
-        run: pwd
-
-      - name: List All Files and Directories
-        run: ls -a
-
-      - name: Package Code
-        run: |
-          cd src
-          zip -r deployment-package.zip .
-
-      - name: Deploy to AWS Lambda
-        run: |
-          aws lambda update-function-code \
-            --function-name contentManagementSystem \
-            --zip-file fileb://deployment-package.zip
+      - name: serverless deploy
+        uses: serverless/github-action@v3.2
+        with:
+          args: serverless deploy
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
