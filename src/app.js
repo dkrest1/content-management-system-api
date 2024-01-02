@@ -11,6 +11,7 @@ const authRoutes = require('./routes/auth.route');
 const userRoutes = require('./routes/user.route');
 const postRoutes = require('./routes/post.route');
 const categoryRoutes = require('./routes/category.route');
+const healthCheck = require('./middlewares/health-check');
 const initialize = require('./middlewares/passport');
 
 const app = express();
@@ -30,6 +31,9 @@ app.use(helmet());
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+//health check
+app.use(healthCheck);
 
 //passport
 initialize(passport);
