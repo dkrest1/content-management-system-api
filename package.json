@@ -10,7 +10,7 @@
     "dev": "nodemon src/index.js",
     "test": "NODE_ENV=test jest ",
     "test:watch": "NODE_ENV=test jest --watch",
-    "prepare": "husky install",
+    "prepare": "NODE_ENV=development husky install",
     "deploy": "npm start"
   },
   "keywords": [
