@@ -66,3 +66,11 @@ const sockerServer = async function (appServer) {
 };
 
 module.exports = sockerServer;
+
+
+
+
+// for the socket server
+//  admin - get all users
+// admin - upgrade a user to admin
+// the payload has to contain the userRole

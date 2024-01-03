@@ -6,6 +6,10 @@ provider:
   runtime: nodejs18.x
   stage: dev
   region: us-west-1
+  
+package:
+  include:
+    - node_modules/**
 
 functions:
   api:
