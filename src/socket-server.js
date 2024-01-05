@@ -5,27 +5,50 @@ const UserModel = require('./models/user.model');
 const logger = require('./config/logger');
 
 const sockerServer = async function (appServer) {
-  const io = new Server(appServer);
+  const io = new Server(appServer, {
+    cors: {
+      origin: '*'
+    }
+  });
 
   io.use(async (socket, next) => {
     const token = socket.handshake.auth.token;
-    const payload = validateToken(token, JWT_SECRET);
-
-    if (!payload) socket.disconnect(true);
-
-    const id = payload._id;
-
     try {
-      const user = await UserModel.findById(id);
 
-      if (!user) socket.disconnect(true);
+      const payload = await validateToken(token, JWT_SECRET);
 
-      socket._id = id;
-      socket.fullname = user.name;
+      if (!payload) socket.disconnect(true);
+
+      const { sub, role } = payload;
+    
+      if(role !== 'admin') {
+        socket.emit('error', 'Unauthorized');
+        socket.disconnect(true);
+        next();
+      }
+
+      const user = await UserModel.findById(sub);
+
+      if (!user) {
+        socket.emit('error', 'User not found');
+        socket.disconnect(true);
+        next();
+
+      };
+
+      socket._id = sub;
+      socket.username = user.username;
       next();
     } catch (error) {
-      logger.error(error);
-      return socket.disconnect(true);
+      if (error.name === 'TokenExpiredError') {
+        // Handle JWT expired error here
+        socket.emit('error', 'Token expired');
+        socket.disconnect(true);
+      } else {
+        // Handle other errors
+        logger.error(error);
+        socket.disconnect(true);
+      }
     }
   });
 
@@ -55,6 +78,25 @@ const sockerServer = async function (appServer) {
       }
     });
 
+    socket.on('upgrade-user', async (email, cb) => {
+      try {
+        const user = await UserModel.findOne({ email });
+
+        if(!user) {
+          cb(new Error('user not found'));
+        }
+
+        user.userRole = 'admin';
+
+        await user.save();
+
+        cb(null, `User with ${email} upgraded to admin successfully`);
+      } catch (error) {
+        logger.error(error);
+        cb(new Error('Internal server error'));
+      }
+    });
+
     socket.on('disconnect', async () => {
       onlineUsers.delete(socket._id);
     });
@@ -66,11 +108,3 @@ const sockerServer = async function (appServer) {
 };
 
 module.exports = sockerServer;
-
-
-
-
-// for the socket server
-//  admin - get all users
-// admin - upgrade a user to admin
-// the payload has to contain the userRole

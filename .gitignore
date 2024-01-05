@@ -7,3 +7,6 @@ jspm_packages
 
 # env environment
 .env
+
+# frontend test
+frontend-test/
